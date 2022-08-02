@@ -10,11 +10,12 @@ public class DeveloperView {
     DeveloperController developerController = new DeveloperController();
 
     public void getDeveloperById(Long id) {
-        System.out.println("ID:           " + developerController.getDeveloperById(id).getId());
-        System.out.println("FirstName:    " + developerController.getDeveloperById(id).getFirstName());
-        System.out.println("LastName:     " + developerController.getDeveloperById(id).getLastName());
-        System.out.println("Status:       " + developerController.getDeveloperById(id).getStatus());
-        System.out.println("Specialty_id: " + developerController.getDeveloperById(id).getSpecialty().getId());
+        System.out.println("ID:             " + developerController.getDeveloperById(id).getId());
+        System.out.println("FirstName:      " + developerController.getDeveloperById(id).getFirstName());
+        System.out.println("LastName:       " + developerController.getDeveloperById(id).getLastName());
+        System.out.println("Status:         " + developerController.getDeveloperById(id).getStatus());
+        System.out.println("Specialty:      " + developerController.getDeveloperById(id).getSpecialty().getName());
+        System.out.println("Skills:         " + developerController.getDeveloperById(id).getSkills());
         System.out.println("==============================================");
     }
 

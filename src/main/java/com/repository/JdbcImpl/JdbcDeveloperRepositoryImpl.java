@@ -1,6 +1,7 @@
 package com.repository.JdbcImpl;
 
 import com.model.Developer;
+import com.model.Skill;
 import com.model.Specialty;
 import com.model.Status;
 import com.repository.DeveloperRepository;
@@ -18,7 +19,13 @@ public class JdbcDeveloperRepositoryImpl implements DeveloperRepository {
     @Override
     public Developer getById(Long aLong) {
         Developer developer = new Developer();
-        String sqlQuery = "SELECT id, firstName, lastName, status, specialty_id FROM developers WHERE id = ?";
+        String sqlQuery = "" +
+                "SELECT developers_id AS id, developers.firstName, developers.lastName, developers.status, skills_id,specialty.id AS specialty_id, specialty.name AS specialty, skills.name " +
+                "FROM developers_skills " +
+                "LEFT JOIN skills ON skills_id = skills.id " +
+                "LEFT JOIN developers ON developers.id = developers_skills.developers_id " +
+                "LEFT JOIN specialty ON developers.specialty_id = specialty.id " +
+                "WHERE developers_id = ?;";
         try(PreparedStatement preparedStatement = JDBCUtils.getPreparedStatement(sqlQuery)) {
             preparedStatement.setLong(1, aLong);
             ResultSet resultSet = preparedStatement.getResultSet();
@@ -32,6 +39,11 @@ public class JdbcDeveloperRepositoryImpl implements DeveloperRepository {
                 if (resultSet.getString("status").equals("DELETED"))
                     developer.setStatus(Status.DELETED);
                 developer.getSpecialty().setId(resultSet.getLong("specialty_id"));
+                developer.getSpecialty().setName(resultSet.getString("specialty"));
+                Skill skill = new Skill();
+                skill.setId(resultSet.getLong("skills_id"));
+                skill.setName(resultSet.getString("name"));
+                developer.getSkills().add(skill);
             }
         } catch (SQLException e) {
             e.printStackTrace();

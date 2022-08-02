@@ -8,7 +8,7 @@ import java.util.List;
 
 public class SkillService {
 
-    SkillRepository skillRepository = new JdbcSkillRepositoryImpl();
+    private final SkillRepository skillRepository = new JdbcSkillRepositoryImpl();
 
     public SkillService() {}
 

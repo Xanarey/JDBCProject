@@ -8,7 +8,7 @@ import java.util.List;
 
 public class SpecialtyService {
 
-    SpecialtyRepository specialtyRepository = new JdbcSpecialtyRepositoryImpl();
+    private final SpecialtyRepository specialtyRepository = new JdbcSpecialtyRepositoryImpl();
 
     public SpecialtyService() {}
 
