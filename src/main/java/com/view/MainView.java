@@ -37,6 +37,8 @@ public class MainView {
                     System.out.println("Введите id:");
                     ID = scanner.nextLong();
                 } while (ID <= 0);
+                developerView.getDeveloperById(ID);
+                System.out.println("Внести изменения: ");
                 System.out.println("Введите firstName:");
                 do {
                     FIRST_NAME = scanner.nextLine();
@@ -187,7 +189,7 @@ public class MainView {
             2.  Вывести всех разработчиков
             3.  Вывести разработчика
             4.  Изменить запись разработчика
-            5.  Удалить разработчика
+            5.  Удалить разработчика (ПОМЕТИТЬ КАК 'DELETED')
             6.  Добавить разработчика
             ---Работа с БД SPECIALTY---
             7.  Вывести все специальности
