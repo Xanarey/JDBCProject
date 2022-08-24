@@ -12,12 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 
 public class DeveloperServiceTest {
 
-    private DeveloperService developerService = new DeveloperService();
-    private JdbcDeveloperRepositoryImpl jdbcDeveloperRepository = new JdbcDeveloperRepositoryImpl();
+    private final DeveloperService developerService = new DeveloperService();
+    private final JdbcDeveloperRepositoryImpl jdbcDeveloperRepository = new JdbcDeveloperRepositoryImpl();
 
     @Test
     public void getById() {
@@ -27,6 +28,11 @@ public class DeveloperServiceTest {
         Developer developer = developerService.getById(1L);
 
         assertEquals(developer, devRepo.getById(1L));
+    }
+
+    @Test
+    public void getByIdNotSuccessful() {
+        assertNotNull(developerService.getById(1L));
     }
 
     @Test
@@ -40,21 +46,34 @@ public class DeveloperServiceTest {
     }
 
     @Test
+    public void getAllNotSuccessful() {
+        assertNotNull(developerService.getAll());
+    }
+
+    @Test
     public void deleteById() {
         JdbcDeveloperRepositoryImpl devRepo = Mockito.mock(JdbcDeveloperRepositoryImpl.class);
         doNothing().when(devRepo).deleteById(1L);
-        // пока разбираюсь , не пойму как протестить
+        // TODO: Как правильно протестировать работу данного метода ?
     }
 
     @Test
     public void update() {
-        Developer developer = new Developer();
-        assertEquals(developer, developerService.update(developer));
+        assertEquals(new Developer(), developerService.update(new Developer()));
+    }
+
+    @Test
+    public void updateNotSuccessful() {
+        assertNotNull(developerService.update(new Developer()));
     }
 
     @Test
     public void insert() {
-        Developer developer = new Developer();
-        assertEquals(developer, developerService.insert(developer));
+        assertEquals(new Developer(), developerService.insert(new Developer()));
+    }
+
+    @Test
+    public void insertNotSuccessful() {
+        assertNotNull(developerService.insert(new Developer()));
     }
 }
