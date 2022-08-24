@@ -8,11 +8,12 @@ public class Developer {
     private Long id;
     private String firstName;
     private String lastName;
-    private Status status;
+    private Status status = Status.ACTIVE;
     private Specialty specialty = new Specialty();
     private List<Skill> skills = new ArrayList<>();
 
     public Developer() {
+        id = 1L;
     }
 
     public Long getId() {

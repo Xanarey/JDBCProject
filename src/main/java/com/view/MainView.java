@@ -47,10 +47,6 @@ public class MainView {
                     System.out.println("Введите lastName:");
                     LAST_NAME = scanner.nextLine();
                 } while (LAST_NAME.equals(""));
-                System.out.println("Установите текущий статус (1 - ACTIVE, 2 - DELETED)");
-                do {
-                    STATUS_ID = scanner.nextLong();
-                } while (STATUS_ID != 1 && STATUS_ID != 2);
                 specialtyView.getAllSpecialty();
                 System.out.println("Выберите специальность по id: ");
                 do {
@@ -58,10 +54,7 @@ public class MainView {
                 } while (SPECIALTY_ID <= 0);
                 Specialty specialty = new Specialty();
                 specialty.setId(SPECIALTY_ID);
-                if (STATUS_ID == 1)
-                    developerView.updateDeveloper(ID, FIRST_NAME, LAST_NAME, Status.ACTIVE, specialty);
-                if (STATUS_ID == 2)
-                    developerView.updateDeveloper(ID, FIRST_NAME, LAST_NAME, Status.DELETED, specialty);
+                developerView.updateDeveloper(ID, FIRST_NAME, LAST_NAME, Status.ACTIVE, specialty);
             }
 
             if (CHOICE_MENU == 5) {

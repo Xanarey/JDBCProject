@@ -7,6 +7,7 @@ public class Specialty {
     private String name;
 
     public Specialty() {
+        id = 1L;
     }
 
     public Long getId() {
