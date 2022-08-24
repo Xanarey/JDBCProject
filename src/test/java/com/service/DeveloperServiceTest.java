@@ -43,7 +43,7 @@ public class DeveloperServiceTest {
     public void deleteById() {
         JdbcDeveloperRepositoryImpl devRepo = Mockito.mock(JdbcDeveloperRepositoryImpl.class);
         doNothing().when(devRepo).deleteById(1L);
-
+        // пока разбираюсь , не пойму как протестить
     }
 
     @Test
