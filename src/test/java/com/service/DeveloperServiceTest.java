@@ -28,6 +28,7 @@ public class DeveloperServiceTest {
         Developer developer = developerService.getById(1L);
 
         assertEquals(developer, devRepo.getById(1L));
+        Mockito.verify(devRepo).getById(1L);
     }
 
     @Test
@@ -43,6 +44,7 @@ public class DeveloperServiceTest {
         List<Developer> developerList = developerService.getAll();
 
         assertEquals(developerList, devRepo.getAll());
+        Mockito.verify(devRepo).getAll();
     }
 
     @Test
