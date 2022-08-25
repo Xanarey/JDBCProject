@@ -13,11 +13,22 @@ public class DeveloperControllerTest {
 
     @Test
     public void getDeveloperById() {
+        assertEquals(developerController.getDeveloperById(1L), developerService.getById(1L));
+    }
 
+    @Test
+    public void getDeveloperByIdNotSuccessful() {
+        assertNotNull(developerController.getDeveloperById(1L));
     }
 
     @Test
     public void getAllDeveloper() {
+        assertEquals(developerController.getAllDeveloper(), developerService.getAll());
+    }
+
+    @Test
+    public void getAllDeveloperNotSuccessful() {
+        assertNotNull(developerController.getAllDeveloper());
     }
 
     @Test
@@ -25,10 +36,23 @@ public class DeveloperControllerTest {
     }
 
     @Test
+    public void deleteDeveloperByIdNotSuccessful() {
+    }
+
+    @Test
     public void updateDeveloper() {
+
+    }
+
+    @Test
+    public void updateDeveloperNotSuccessful() {
     }
 
     @Test
     public void insertDeveloper() {
+    }
+
+    @Test
+    public void insertDeveloperNotSuccessful() {
     }
 }
