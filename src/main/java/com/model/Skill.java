@@ -7,6 +7,7 @@ public class Skill {
     private String name;
 
     public Skill() {
+        id = 1L;
     }
 
     public Long getId() {
