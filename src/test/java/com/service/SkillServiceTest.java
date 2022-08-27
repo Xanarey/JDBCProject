@@ -15,15 +15,17 @@ public class SkillServiceTest {
     private final SkillService skillService = new SkillService();
     private final JdbcSkillRepositoryImpl jdbcSkillRepository = new JdbcSkillRepositoryImpl();
 
+    @Mock
+    JdbcSkillRepositoryImpl jdbcSkillRepoMock = Mockito.mock(JdbcSkillRepositoryImpl.class);
+
     @Test
     public void getById() {
-        JdbcSkillRepositoryImpl skillRepo = Mockito.mock(JdbcSkillRepositoryImpl.class);
-        Mockito.when(skillRepo.getById(1L)).thenReturn(jdbcSkillRepository.getById(1L));
+        Mockito.when(jdbcSkillRepoMock.getById(1L)).thenReturn(jdbcSkillRepository.getById(1L));
 
         Skill skill = skillService.getById(1L);
 
-        assertEquals(skill, skillRepo.getById(1L));
-        Mockito.verify(skillRepo).getById(1L);
+        assertEquals(skill, jdbcSkillRepoMock.getById(1L));
+        Mockito.verify(jdbcSkillRepoMock).getById(1L);
     }
 
     @Test
@@ -33,13 +35,12 @@ public class SkillServiceTest {
 
     @Test
     public void getAll() {
-        JdbcSkillRepositoryImpl skillRepo = Mockito.mock(JdbcSkillRepositoryImpl.class);
-        Mockito.when(skillRepo.getAll()).thenReturn(jdbcSkillRepository.getAll());
+        Mockito.when(jdbcSkillRepoMock.getAll()).thenReturn(jdbcSkillRepository.getAll());
 
         List<Skill> skillList = skillService.getAll();
 
-        assertEquals(skillList, skillRepo.getAll());
-        Mockito.verify(skillRepo).getAll();
+        assertEquals(skillList, jdbcSkillRepoMock.getAll());
+        Mockito.verify(jdbcSkillRepoMock).getAll();
     }
 
     @Test
@@ -54,7 +55,9 @@ public class SkillServiceTest {
 
     @Test
     public void update() {
-        assertEquals(skillService.update(new Skill()), jdbcSkillRepository.update(new Skill()));
+        Mockito.when(jdbcSkillRepoMock.update(new Skill())).thenReturn(skillService.update(new Skill()));
+        assertEquals(skillService.update(new Skill()), jdbcSkillRepoMock.update(new Skill()));
+        Mockito.verify(jdbcSkillRepoMock).update(new Skill());
     }
 
     @Test
@@ -64,7 +67,9 @@ public class SkillServiceTest {
 
     @Test
     public void insert() {
-        assertEquals(skillService.insert(new Skill()), jdbcSkillRepository.insert(new Skill()));
+        Mockito.when(jdbcSkillRepoMock.insert(new Skill())).thenReturn(skillService.insert(new Skill()));
+        assertEquals(skillService.insert(new Skill()), jdbcSkillRepoMock.insert(new Skill()));
+        Mockito.verify(jdbcSkillRepoMock).insert(new Skill());
     }
 
     @Test
