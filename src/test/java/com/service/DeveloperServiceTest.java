@@ -62,6 +62,7 @@ public class DeveloperServiceTest {
         JdbcDeveloperRepositoryImpl jdbcDeveloperRepository = Mockito.mock(JdbcDeveloperRepositoryImpl.class);
         Mockito.when(jdbcDeveloperRepository.update(new Developer())).thenReturn(developerService.update(new Developer()));
         assertEquals(new Developer(), jdbcDeveloperRepository.update(new Developer()));
+        Mockito.verify(jdbcDeveloperRepository).update(new Developer());
     }
 
     @Test
@@ -73,7 +74,8 @@ public class DeveloperServiceTest {
     public void insert() {
         JdbcDeveloperRepositoryImpl jdbcDeveloperRepository = Mockito.mock(JdbcDeveloperRepositoryImpl.class);
         Mockito.when(jdbcDeveloperRepository.insert(new Developer())).thenReturn(developerService.insert(new Developer()));
-        assertEquals(new Developer(), developerService.insert(new Developer()));
+        assertEquals(new Developer(), jdbcDeveloperRepository.insert(new Developer()));
+        Mockito.verify(jdbcDeveloperRepository).insert(new Developer());
     }
 
     @Test
