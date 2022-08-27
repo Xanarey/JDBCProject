@@ -54,14 +54,14 @@ public class DeveloperServiceTest {
 
     @Test
     public void deleteById() {
-        JdbcDeveloperRepositoryImpl devRepo = Mockito.mock(JdbcDeveloperRepositoryImpl.class);
-        doNothing().when(devRepo).deleteById(1L);
         // TODO: Как правильно протестировать работу данного метода ?
     }
 
     @Test
     public void update() {
-        assertEquals(new Developer(), developerService.update(new Developer()));
+        JdbcDeveloperRepositoryImpl jdbcDeveloperRepository = Mockito.mock(JdbcDeveloperRepositoryImpl.class);
+        Mockito.when(jdbcDeveloperRepository.update(new Developer())).thenReturn(developerService.update(new Developer()));
+        assertEquals(new Developer(), jdbcDeveloperRepository.update(new Developer()));
     }
 
     @Test
@@ -71,6 +71,8 @@ public class DeveloperServiceTest {
 
     @Test
     public void insert() {
+        JdbcDeveloperRepositoryImpl jdbcDeveloperRepository = Mockito.mock(JdbcDeveloperRepositoryImpl.class);
+        Mockito.when(jdbcDeveloperRepository.insert(new Developer())).thenReturn(developerService.insert(new Developer()));
         assertEquals(new Developer(), developerService.insert(new Developer()));
     }
 

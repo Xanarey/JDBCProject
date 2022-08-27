@@ -3,17 +3,25 @@ package com.controller;
 import com.model.Developer;
 import com.service.DeveloperService;
 import org.junit.Test;
+import org.mockito.Mockito;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
 public class DeveloperControllerTest {
 
     private final DeveloperController developerController = new DeveloperController();
-    private final DeveloperService developerService = new DeveloperService();
 
     @Test
     public void getDeveloperById() {
-        assertEquals(developerController.getDeveloperById(1L), developerService.getById(1L));
+        DeveloperService developerServiceMock = Mockito.mock(DeveloperService.class);
+        Mockito.when(developerServiceMock.getById(1L)).thenReturn(developerController.getDeveloperById(1L));
+
+        Developer developer = developerController.getDeveloperById(1L);
+
+        assertEquals(developer, developerServiceMock.getById(1L));
+        Mockito.verify(developerServiceMock).getById(1L);
     }
 
     @Test
@@ -23,7 +31,13 @@ public class DeveloperControllerTest {
 
     @Test
     public void getAllDeveloper() {
-        assertEquals(developerController.getAllDeveloper(), developerService.getAll());
+        DeveloperService developerServiceMock = Mockito.mock(DeveloperService.class);
+        Mockito.when(developerServiceMock.getAll()).thenReturn(developerController.getAllDeveloper());
+
+        List<Developer> developerList = developerController.getAllDeveloper();
+
+        assertEquals(developerList, developerServiceMock.getAll());
+        Mockito.verify(developerServiceMock).getAll();
     }
 
     @Test
