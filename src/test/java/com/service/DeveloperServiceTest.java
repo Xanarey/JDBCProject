@@ -4,9 +4,13 @@ import com.model.Developer;
 import com.model.Specialty;
 import com.model.Status;
 import com.repository.JdbcImpl.JdbcDeveloperRepositoryImpl;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoSession;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,15 +24,17 @@ public class DeveloperServiceTest {
     private final DeveloperService developerService = new DeveloperService();
     private final JdbcDeveloperRepositoryImpl jdbcDeveloperRepository = new JdbcDeveloperRepositoryImpl();
 
+    @Mock
+    JdbcDeveloperRepositoryImpl jdbcDevRepoMock = Mockito.mock(JdbcDeveloperRepositoryImpl.class);
+
     @Test
     public void getById() {
-        JdbcDeveloperRepositoryImpl devRepo = Mockito.mock(JdbcDeveloperRepositoryImpl.class);
-        Mockito.when(devRepo.getById(1L)).thenReturn(jdbcDeveloperRepository.getById(1L));
+        Mockito.when(jdbcDevRepoMock.getById(1L)).thenReturn(jdbcDeveloperRepository.getById(1L));
 
         Developer developer = developerService.getById(1L);
 
-        assertEquals(developer, devRepo.getById(1L));
-        Mockito.verify(devRepo).getById(1L);
+        assertEquals(developer, jdbcDevRepoMock.getById(1L));
+        Mockito.verify(jdbcDevRepoMock).getById(1L);
     }
 
     @Test
@@ -38,13 +44,12 @@ public class DeveloperServiceTest {
 
     @Test
     public void getAll() {
-        JdbcDeveloperRepositoryImpl devRepo = Mockito.mock(JdbcDeveloperRepositoryImpl.class);
-        Mockito.when(devRepo.getAll()).thenReturn(jdbcDeveloperRepository.getAll());
+        Mockito.when(jdbcDevRepoMock.getAll()).thenReturn(jdbcDeveloperRepository.getAll());
 
         List<Developer> developerList = developerService.getAll();
 
-        assertEquals(developerList, devRepo.getAll());
-        Mockito.verify(devRepo).getAll();
+        assertEquals(developerList, jdbcDevRepoMock.getAll());
+        Mockito.verify(jdbcDevRepoMock).getAll();
     }
 
     @Test
@@ -59,10 +64,9 @@ public class DeveloperServiceTest {
 
     @Test
     public void update() {
-        JdbcDeveloperRepositoryImpl jdbcDeveloperRepository = Mockito.mock(JdbcDeveloperRepositoryImpl.class);
-        Mockito.when(jdbcDeveloperRepository.update(new Developer())).thenReturn(developerService.update(new Developer()));
-        assertEquals(new Developer(), jdbcDeveloperRepository.update(new Developer()));
-        Mockito.verify(jdbcDeveloperRepository).update(new Developer());
+        Mockito.when(jdbcDevRepoMock.update(new Developer())).thenReturn(developerService.update(new Developer()));
+        assertEquals(new Developer(), jdbcDevRepoMock.update(new Developer()));
+        Mockito.verify(jdbcDevRepoMock).update(new Developer());
     }
 
     @Test
@@ -72,14 +76,14 @@ public class DeveloperServiceTest {
 
     @Test
     public void insert() {
-        JdbcDeveloperRepositoryImpl jdbcDeveloperRepository = Mockito.mock(JdbcDeveloperRepositoryImpl.class);
-        Mockito.when(jdbcDeveloperRepository.insert(new Developer())).thenReturn(developerService.insert(new Developer()));
-        assertEquals(new Developer(), jdbcDeveloperRepository.insert(new Developer()));
-        Mockito.verify(jdbcDeveloperRepository).insert(new Developer());
+        Mockito.when(jdbcDevRepoMock.insert(new Developer())).thenReturn(developerService.insert(new Developer()));
+        assertEquals(new Developer(), jdbcDevRepoMock.insert(new Developer()));
+        Mockito.verify(jdbcDevRepoMock).insert(new Developer());
     }
 
     @Test
     public void insertNotSuccessful() {
         assertNotNull(developerService.insert(new Developer()));
     }
+
 }
