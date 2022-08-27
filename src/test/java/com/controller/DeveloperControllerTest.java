@@ -3,6 +3,7 @@ package com.controller;
 import com.model.Developer;
 import com.service.DeveloperService;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.List;
@@ -12,11 +13,14 @@ import static org.junit.Assert.*;
 public class DeveloperControllerTest {
 
     private final DeveloperController developerController = new DeveloperController();
+    private final DeveloperService developerService = new DeveloperService();
+
+    @Mock
+    DeveloperService developerServiceMock = Mockito.mock(DeveloperService.class);
 
     @Test
     public void getDeveloperById() {
-        DeveloperService developerServiceMock = Mockito.mock(DeveloperService.class);
-        Mockito.when(developerServiceMock.getById(1L)).thenReturn(developerController.getDeveloperById(1L));
+        Mockito.when(developerServiceMock.getById(1L)).thenReturn(developerService.getById(1L));
 
         Developer developer = developerController.getDeveloperById(1L);
 
@@ -31,8 +35,7 @@ public class DeveloperControllerTest {
 
     @Test
     public void getAllDeveloper() {
-        DeveloperService developerServiceMock = Mockito.mock(DeveloperService.class);
-        Mockito.when(developerServiceMock.getAll()).thenReturn(developerController.getAllDeveloper());
+        Mockito.when(developerServiceMock.getAll()).thenReturn(developerService.getAll());
 
         List<Developer> developerList = developerController.getAllDeveloper();
 
