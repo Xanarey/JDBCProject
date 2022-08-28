@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
+      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.5.xsd">
+
+    <changeSet id="v01-1" author="Timur">
+        <createTable tableName="developers">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="firstName" type="varchar(255)"/>
+            <column name="lastName" type="varchar(255)"/>
+            <column name="status" type="varchar(255)"/>
+            <column name="specialty_id" type="int">
+                <constraints foreignKeyName="true">
+            </column>
+        </createTable>
+    </changeSet>
+    
+</databaseChangeLog>
