@@ -40,5 +40,28 @@
             <column name="specialty_id" value="3"/>
         </insert>
     </changeSet>
+
+
+    <changeSet id="v01-2" author="Timur">
+        <createTable tableName="skills">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+        </createTable>
+
+        <insert tableName="skills">
+            <column name="name" value="Cpp"/>
+        </insert>
+
+        <insert tableName="skills">
+            <column name="name" value="Java"/>
+        </insert>
+
+        <insert tableName="skills">
+            <column name="name" value="PHP"/>
+        </insert>
+    </changeSet>
+
     
 </databaseChangeLog>
