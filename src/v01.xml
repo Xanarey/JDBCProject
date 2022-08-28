@@ -15,7 +15,9 @@
             <column name="lastName" type="varchar(255)"/>
             <column name="status" type="varchar(255)"/>
             <column name="specialty_id" type="int">
-                <constraints foreignKeyName="true">
+                <constraints foreignKeyName="true"
+                             referencedTableName="specialty"
+                             referencedColumnNames="id"/>
             </column>
         </createTable>
 
@@ -92,10 +94,14 @@
                 <constraints primaryKey="true"/>
             </column>
             <column name="developers_id" type="int">
-                <constraints foreignKeyName="true"/>
+                <constraints foreignKeyName="true"
+                             referencedTableName="developers"
+                             referencedColumnNames="id"/>
             </column>
             <column name="skills_id" type="int">
-                <constraints foreignKeyName="true"/>
+                <constraints foreignKeyName="true"
+                             referencedTableName="skills"
+                             referencedColumnNames="id"/>
             </column>
         </createTable>
 
