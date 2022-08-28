@@ -18,6 +18,27 @@
                 <constraints foreignKeyName="true">
             </column>
         </createTable>
+
+        <insert tableName="developers">
+            <column name="firstName" value="Anna"/>
+            <column name="lastName" value="Vasilevya"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="specialty_id" value="1"/>
+        </insert>
+
+        <insert tableName="developers">
+            <column name="firstName" value="Tomas"/>
+            <column name="lastName" value="Anderson"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="specialty_id" value="2"/>
+        </insert>
+
+        <insert tableName="developers">
+            <column name="firstName" value="Eliza"/>
+            <column name="lastName" value="Chikson"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="specialty_id" value="3"/>
+        </insert>
     </changeSet>
     
 </databaseChangeLog>
