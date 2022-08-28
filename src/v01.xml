@@ -51,17 +51,68 @@
         </createTable>
 
         <insert tableName="skills">
+            <column name="name" value="Bootstrap"/>
+        </insert>
+
+        <insert tableName="skills">
+            <column name="name" value="Git"/>
+        </insert>
+
+        <insert tableName="skills">
+            <column name="name" value="Maven"/>
+        </insert>
+    </changeSet>
+
+
+    <changeSet id="v01-3" author="Timur">
+        <createTable tableName="specialty">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+        </createTable>
+
+        <insert tableName="specialty">
             <column name="name" value="Cpp"/>
         </insert>
 
-        <insert tableName="skills">
+        <insert tableName="specialty">
             <column name="name" value="Java"/>
         </insert>
 
-        <insert tableName="skills">
+        <insert tableName="specialty">
             <column name="name" value="PHP"/>
         </insert>
     </changeSet>
 
-    
+
+    <changeSet id="v01-4" author="Timur">
+        <createTable tableName="developers_skills">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="developers_id" type="int">
+                <constraints foreignKeyName="true"/>
+            </column>
+            <column name="skills_id" type="int">
+                <constraints foreignKeyName="true"/>
+            </column>
+        </createTable>
+
+        <insert tableName="developers_skills">
+            <column name="developers_id" value="1"/>
+            <column name="skills_id" value="1"/>
+        </insert>
+
+        <insert tableName="developers_skills">
+            <column name="developers_id" value="2"/>
+            <column name="skills_id" value="2"/>
+        </insert>
+
+        <insert tableName="developers_skills">
+            <column name="developers_id" value="2"/>
+            <column name="skills_id" value="3"/>
+        </insert>
+    </changeSet>
+
 </databaseChangeLog>
