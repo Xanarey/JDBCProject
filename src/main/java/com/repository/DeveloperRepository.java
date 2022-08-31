@@ -2,5 +2,5 @@ package com.repository;
 
 import com.model.Developer;
 
-public interface DeveloperRepository extends GeneralRepository<Developer, Long>{
+public interface DeveloperRepository extends GenericRepository<Developer, Long> {
 }
