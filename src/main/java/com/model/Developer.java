@@ -16,6 +16,15 @@ public class Developer {
         id = 1L;
     }
 
+    public Developer(Long id, String firstName, String lastName, Status status, Specialty specialty, List<Skill> skills) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.status = status;
+        this.specialty = specialty;
+        this.skills = skills;
+    }
+
     public Long getId() {
         return id;
     }

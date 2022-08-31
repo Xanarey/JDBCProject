@@ -1,79 +1,60 @@
 package com.service;
 
 import com.model.Skill;
-import com.repository.JdbcImpl.JdbcSkillRepositoryImpl;
+import com.repository.SkillRepository;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
 
 public class SkillServiceTest {
 
-    private final SkillService skillService = new SkillService();
-    private final JdbcSkillRepositoryImpl jdbcSkillRepository = new JdbcSkillRepositoryImpl();
-
     @Mock
-    JdbcSkillRepositoryImpl jdbcSkillRepoMock = Mockito.mock(JdbcSkillRepositoryImpl.class);
+    private SkillRepository skillRepository;
+    private final SkillService skillService;
 
-    @Test
-    public void getById() {
-        Mockito.when(jdbcSkillRepoMock.getById(1L)).thenReturn(jdbcSkillRepository.getById(1L));
-
-        Skill skill = skillService.getById(1L);
-
-        assertEquals(skill, jdbcSkillRepoMock.getById(1L));
-        Mockito.verify(jdbcSkillRepoMock).getById(1L);
+    public SkillServiceTest() {
+        MockitoAnnotations.openMocks(this);
+        this.skillService = new SkillService(skillRepository);
     }
 
-    @Test
-    public void getByIdNotSuccessful() {
-        assertNotNull(skillService.getById(1L));
+    private List<Skill> getSkills() {
+        Skill sk1 = new Skill(1L, "Bootstrap");
+        Skill sk2 = new Skill(2L, "Git");
+        List<Skill> skillList = new ArrayList<>();
+        skillList.add(sk1);
+        skillList.add(sk2);
+        return skillList;
     }
 
     @Test
     public void getAll() {
-        Mockito.when(jdbcSkillRepoMock.getAll()).thenReturn(jdbcSkillRepository.getAll());
+        Mockito.when(skillRepository.getAll()).thenReturn(getSkills());
 
         List<Skill> skillList = skillService.getAll();
 
-        assertEquals(skillList, jdbcSkillRepoMock.getAll());
-        Mockito.verify(jdbcSkillRepoMock).getAll();
+        assertNotNull(skillList);
+        assertEquals(2, skillList.size());
     }
 
     @Test
-    public void getAllNotSuccessful() {
-        assertNotNull(skillService.getAll());
+    public void getById() {
     }
 
     @Test
     public void deleteById() {
-
     }
 
     @Test
     public void update() {
-        Mockito.when(jdbcSkillRepoMock.update(new Skill())).thenReturn(skillService.update(new Skill()));
-        assertEquals(skillService.update(new Skill()), jdbcSkillRepoMock.update(new Skill()));
-        Mockito.verify(jdbcSkillRepoMock).update(new Skill());
-    }
-
-    @Test
-    public void updateNotSuccessful() {
-        assertNotNull(skillService.update(new Skill()));
     }
 
     @Test
     public void insert() {
-        Mockito.when(jdbcSkillRepoMock.insert(new Skill())).thenReturn(skillService.insert(new Skill()));
-        assertEquals(skillService.insert(new Skill()), jdbcSkillRepoMock.insert(new Skill()));
-        Mockito.verify(jdbcSkillRepoMock).insert(new Skill());
-    }
-
-    @Test
-    public void insertNotSuccessful() {
-        assertNotNull(skillService.insert(new Skill()));
     }
 }

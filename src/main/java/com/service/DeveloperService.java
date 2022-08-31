@@ -8,7 +8,15 @@ import java.util.List;
 
 public class DeveloperService{
 
-    private final DeveloperRepository developerRepository = new JdbcDeveloperRepositoryImpl();
+    private final DeveloperRepository developerRepository;
+
+    public DeveloperService() {
+        this.developerRepository = new JdbcDeveloperRepositoryImpl();
+    }
+
+    public DeveloperService(DeveloperRepository developerRepository) {
+        this.developerRepository = developerRepository;
+    }
 
     public List<Developer> getAll() {
         return developerRepository.getAll();

@@ -6,8 +6,8 @@ public interface GenericRepository<T, ID> {
 
     List<T> getAll();
     T getById(ID id);
-    T update(T id);
-    void deleteById(Long id);
-    T insert(T id);
+    T update(T t);
+    T insert(T t);
+    void deleteById(ID id);
 
 }
