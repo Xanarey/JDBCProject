@@ -16,9 +16,9 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class DeveloperServiceTest {
+
     @Mock
     private DeveloperRepository devRepoMock;
-
     private final DeveloperService devServiceMock;
 
     public DeveloperServiceTest() {
