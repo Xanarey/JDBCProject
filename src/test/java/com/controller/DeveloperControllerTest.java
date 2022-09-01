@@ -1,75 +1,97 @@
 package com.controller;
 
 import com.model.Developer;
+import com.model.Specialty;
+import com.model.Status;
 import com.service.DeveloperService;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class DeveloperControllerTest {
-
-    private final DeveloperController developerController = new DeveloperController();
-    private final DeveloperService developerService = new DeveloperService();
+class DeveloperControllerTest {
 
     @Mock
-    DeveloperService developerServiceMock = Mockito.mock(DeveloperService.class);
+    private DeveloperService developerService;
+    private final DeveloperController developerController;
 
-    @Test
-    public void getDeveloperById() {
-        Mockito.when(developerServiceMock.getById(1L)).thenReturn(developerService.getById(1L));
-
-        Developer developer = developerController.getDeveloperById(1L);
-
-        assertEquals(developer, developerServiceMock.getById(1L));
-        Mockito.verify(developerServiceMock).getById(1L);
+    public DeveloperControllerTest() {
+        MockitoAnnotations.openMocks(this);
+        this.developerController = new DeveloperController(developerService);
     }
 
     @Test
-    public void getDeveloperByIdNotSuccessful() {
-        assertNotNull(developerController.getDeveloperById(1L));
+    void getAllDeveloper() {
+        Mockito.when(developerService.getAll()).thenReturn(Arrays.asList(
+                new Developer(1L, "A", "B", Status.ACTIVE, new Specialty(1L, "Q"), new ArrayList<>()),
+                new Developer(2L, "A1", "B1", Status.ACTIVE, new Specialty(11L, "Q1"), new ArrayList<>())
+        ));
+
+        List<Developer> developerList = developerService.getAll();
+
+        assertNotNull(developerList);
+        assertEquals(2, developerList.size());
+        assertEquals("A1", developerList.get(1).getFirstName());
     }
 
     @Test
-    public void getAllDeveloper() {
-        Mockito.when(developerServiceMock.getAll()).thenReturn(developerService.getAll());
+    void getDeveloperById() {
+        Mockito.when(developerService.getById(1L)).thenReturn(new Developer(1L, "A", "B", Status.ACTIVE, new Specialty(1L, "Q"), new ArrayList<>()));
+        Developer developer = new Developer(1L, "A", "B", Status.ACTIVE, new Specialty(1L, "Q"), new ArrayList<>());
+        developerController.getDeveloperById(1L);
 
-        List<Developer> developerList = developerController.getAllDeveloper();
-
-        assertEquals(developerList, developerServiceMock.getAll());
-        Mockito.verify(developerServiceMock).getAll();
+        assertNotNull(developer);
+        assertEquals(1L, developer.getId().longValue());
+        assertEquals("A", developer.getFirstName());
     }
 
     @Test
-    public void getAllDeveloperNotSuccessful() {
-        assertNotNull(developerController.getAllDeveloper());
+    void deleteDeveloperById() {
+        Mockito.doNothing().when(developerService).deleteById(1L);
+
+        developerController.deleteDeveloperById(1L);
+        Mockito.verify(developerService).deleteById(1L);
     }
 
     @Test
-    public void deleteDeveloperById() {
+    void updateDeveloper() {
+        Mockito.when(developerService.update(new Developer(1L, "A", "B", Status.ACTIVE, new Specialty(1L, "Q"), new ArrayList<>())))
+                .thenReturn(new Developer(1L, "A", "B", Status.ACTIVE, new Specialty(1L, "Q"), new ArrayList<>()));
+
+        Developer developer = new Developer(1L, "A", "B", Status.ACTIVE, new Specialty(1L, "Q"), new ArrayList<>());
+        developerController.updateDeveloper(developer.getId(), developer.getFirstName(), developer.getLastName(), developer.getStatus(), developer.getSpecialty());
+
+        assertNotNull(developer);
+        assertEquals(1L, developer.getId().longValue());
+        assertEquals("A", developer.getFirstName());
+
+        developer.setId(2L);
+        developer.setFirstName("Tomas");
+        developerController.updateDeveloper(developer.getId(), developer.getFirstName(), developer.getLastName(), developer.getStatus(), developer.getSpecialty());
+
+        assertNotNull(developer);
+        assertEquals(2L, developer.getId().longValue());
+        assertEquals("Tomas", developer.getFirstName());
     }
 
     @Test
-    public void deleteDeveloperByIdNotSuccessful() {
+    void insertDeveloper() {
+        Mockito.when(developerService.insert(new Developer(1L, "A", "B", Status.ACTIVE, new Specialty(1L, "Q"), new ArrayList<>())))
+                .thenReturn(new Developer(1L, "A", "B", Status.ACTIVE, new Specialty(1L, "Q"), new ArrayList<>()));
+
+        Developer developer = new Developer(1L, "A", "B", Status.ACTIVE, new Specialty(1L, "Q"), new ArrayList<>());
+        developerController.insertDeveloper(developer.getFirstName(), developer.getLastName(), developer.getStatus(), developer.getSpecialty());
+        developer.setFirstName("909090");
+
+        assertNotNull(developer);
+        assertEquals(1L, developer.getId().longValue());
+        assertEquals("909090", developer.getFirstName());
     }
 
-    @Test
-    public void updateDeveloper() {
-
-    }
-
-    @Test
-    public void updateDeveloperNotSuccessful() {
-    }
-
-    @Test
-    public void insertDeveloper() {
-    }
-
-    @Test
-    public void insertDeveloperNotSuccessful() {
-    }
 }

@@ -9,9 +9,15 @@ import java.util.List;
 
 public class DeveloperController {
 
-    DeveloperService developerService = new DeveloperService();
+    private final DeveloperService developerService;
 
-    public DeveloperController() {}
+    public DeveloperController() {
+        this.developerService = new DeveloperService();
+    }
+
+    public DeveloperController(DeveloperService developerService) {
+        this.developerService = developerService;
+    }
 
     public Developer getDeveloperById(Long id) {
         return developerService.getById(id);

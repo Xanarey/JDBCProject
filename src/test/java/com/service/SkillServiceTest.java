@@ -52,7 +52,7 @@ public class SkillServiceTest {
     public void deleteById() {
         Mockito.doNothing().when(skillRepository).deleteById(1L);
 
-        skillRepository.deleteById(1L);
+        skillService.deleteById(1L);
         Mockito.verify(skillRepository).deleteById(1L);
     }
 

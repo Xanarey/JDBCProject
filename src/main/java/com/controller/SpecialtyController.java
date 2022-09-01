@@ -7,9 +7,15 @@ import java.util.List;
 
 public class SpecialtyController {
 
-    SpecialtyService specialtyService = new SpecialtyService();
+    private final SpecialtyService specialtyService;
 
-    public SpecialtyController() {}
+    public SpecialtyController() {
+        this.specialtyService = new SpecialtyService();
+    }
+
+    public SpecialtyController(SpecialtyService specialtyService) {
+        this.specialtyService = specialtyService;
+    }
 
     public Specialty getSpecialtyById(Long id) {
         return specialtyService.getById(id);

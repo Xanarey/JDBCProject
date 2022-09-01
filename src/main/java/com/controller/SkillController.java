@@ -7,9 +7,15 @@ import java.util.List;
 
 public class SkillController {
 
-    SkillService skillService = new SkillService();
+    private final SkillService skillService;
 
-    public SkillController() {}
+    public SkillController() {
+        this.skillService = new SkillService();
+    }
+
+    public SkillController(SkillService skillService) {
+        this.skillService = skillService;
+    }
 
     public Skill getSkillById(Long id) {
         return skillService.getById(id);
