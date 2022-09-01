@@ -46,6 +46,7 @@ public class DeveloperServiceTest {
         Developer developer = devServiceMock.insert(getTestDev());
         developer.setFirstName("909090");
 
+        assertNotNull(developer);
         assertEquals(1L, developer.getId().longValue());
         assertEquals("909090", developer.getFirstName());
     }
@@ -56,6 +57,7 @@ public class DeveloperServiceTest {
 
         Developer developer = devServiceMock.update(getTestDev());
 
+        assertNotNull(developer);
         assertEquals(1L, developer.getId().longValue());
         assertEquals("Ann", developer.getFirstName());
 
@@ -63,6 +65,7 @@ public class DeveloperServiceTest {
         developer.setFirstName("Tomas");
         devServiceMock.update(developer);
 
+        assertNotNull(developer);
         assertEquals(2L, developer.getId().longValue());
         assertEquals("Tomas", developer.getFirstName());
 
