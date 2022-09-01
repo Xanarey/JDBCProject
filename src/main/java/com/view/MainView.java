@@ -197,11 +197,11 @@ public class MainView {
            15.  Удалить скилл
            16.  Добавить скилл
             """;
+
     public static Long ID = 0L;
     public static Long SPECIALTY_ID = 0L;
     public static Long SKILL_ID = 0L;
     public static Long CHOICE_MENU;
-    public static Long STATUS_ID;
     public static String FIRST_NAME;
     public static String LAST_NAME;
     public static String SKILL_NAME;

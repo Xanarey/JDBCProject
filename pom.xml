@@ -14,15 +14,15 @@
   <properties>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.source>15</maven.compiler.source>
+    <maven.compiler.target>15</maven.compiler.target>
     <junit.version>4.13.2</junit.version>
     <mysql.version>8.0.30</mysql.version>
-    <sqlite.version>3.39.2.0</sqlite.version>
-    <postgresql.version>42.4.2</postgresql.version>
+    <sqlite.version>3.39.2.1</sqlite.version>
+    <postgresql.version>42.5.0</postgresql.version>
     <mockito.version>4.7.0</mockito.version>
     <liquibase.version>4.15.0</liquibase.version>
-    <slf4j.version>1.7.36</slf4j.version>
+    <slf4j.version>2.0.0</slf4j.version>
     <logback.version>1.2.11</logback.version>
     <snakeyaml.version>1.30</snakeyaml.version>
 
@@ -91,36 +91,6 @@
           <version>${mockito.version}</version>
           <scope>test</scope>
       </dependency>
-      <dependency>
-          <groupId>org.junit.jupiter</groupId>
-          <artifactId>junit-jupiter</artifactId>
-          <version>5.9.0</version>
-          <scope>test</scope>
-      </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <version>RELEASE</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <version>RELEASE</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <version>RELEASE</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <version>RELEASE</version>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 
   <build>
@@ -182,8 +152,8 @@
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-compiler-plugin</artifactId>
               <configuration>
-                  <source>11</source>
-                  <target>11</target>
+                  <source>15</source>
+                  <target>15</target>
               </configuration>
           </plugin>
       </plugins>

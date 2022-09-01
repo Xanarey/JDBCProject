@@ -5,7 +5,6 @@ import java.sql.*;
 public class JDBCUtils {
     private static volatile JDBCUtils instance;
     private static Connection connection = null;
-    //private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/datadevelopers";
     private static final String DATABASE_URL = "jdbc:sqlite:identifier.sqlite";
     private static final String USER = "root";
     private static final String PASSWORD = "password";
