@@ -8,9 +8,15 @@ import java.util.List;
 
 public class SpecialtyService {
 
-    private final SpecialtyRepository specialtyRepository = new JdbcSpecialtyRepositoryImpl();
+    private final SpecialtyRepository specialtyRepository;
 
-    public SpecialtyService() {}
+    public SpecialtyService() {
+        this.specialtyRepository = new JdbcSpecialtyRepositoryImpl();
+    }
+
+    public SpecialtyService(SpecialtyRepository specialtyRepository) {
+        this.specialtyRepository = specialtyRepository;
+    }
 
     public Specialty getById(Long aLong) {
         return specialtyRepository.getById(aLong);
