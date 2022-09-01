@@ -41,9 +41,10 @@ public class DeveloperServiceTest {
 
     @Test
     public void insert() {
-        Mockito.when(devRepoMock.insert(getTestDev())).thenReturn(getTestDev());
+        Mockito.when(devRepoMock.insert(new Developer(1L, "A", "B", Status.ACTIVE, new Specialty(1L, "Q"), new ArrayList<>())))
+                .thenReturn(new Developer(1L, "A", "B", Status.ACTIVE, new Specialty(1L, "Q"), new ArrayList<>()));
 
-        Developer developer = devServiceMock.insert(getTestDev());
+        Developer developer = devServiceMock.insert(new Developer(1L, "A", "B", Status.ACTIVE, new Specialty(1L, "Q"), new ArrayList<>()));
         developer.setFirstName("909090");
 
         assertNotNull(developer);
@@ -53,13 +54,15 @@ public class DeveloperServiceTest {
 
     @Test
     public void update() {
-        Mockito.when(devRepoMock.update(getTestDev())).thenReturn(getTestDev());
+        Mockito.when(devRepoMock.update(new Developer(1L, "A", "B", Status.ACTIVE, new Specialty(1L, "Q"), new ArrayList<>())))
+                .thenReturn(new Developer(1L, "A", "B", Status.ACTIVE, new Specialty(1L, "Q"), new ArrayList<>()));
 
-        Developer developer = devServiceMock.update(getTestDev());
+        Developer developer = new Developer(1L, "A", "B", Status.ACTIVE, new Specialty(1L, "Q"), new ArrayList<>());
+        devServiceMock.update(developer);
 
         assertNotNull(developer);
         assertEquals(1L, developer.getId().longValue());
-        assertEquals("Ann", developer.getFirstName());
+        assertEquals("A", developer.getFirstName());
 
         developer.setId(2L);
         developer.setFirstName("Tomas");
@@ -81,16 +84,13 @@ public class DeveloperServiceTest {
 
     @Test
     public void getById() {
-        Mockito.when(devRepoMock.getById(1L)).thenReturn(getTestDev());
-        Developer developer = devServiceMock.getById(1L);
+        Mockito.when(devRepoMock.getById(1L)).thenReturn(new Developer(1L, "A", "B", Status.ACTIVE, new Specialty(1L, "Q"), new ArrayList<>()));
+        Developer developer = new Developer(1L, "A", "B", Status.ACTIVE, new Specialty(1L, "Q"), new ArrayList<>());
+        devServiceMock.getById(1L);
 
         assertNotNull(developer);
         assertEquals(1L, developer.getId().longValue());
-        assertEquals("Ann", developer.getFirstName());
-    }
-
-    private Developer getTestDev() {
-        return new Developer(1L, "Ann", "Chikson", Status.ACTIVE, new Specialty(), new ArrayList<>());
+        assertEquals("A", developer.getFirstName());
     }
 
 }
