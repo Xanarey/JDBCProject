@@ -7,7 +7,6 @@ public class Skill {
     private String name;
 
     public Skill() {
-        id = 1L;
     }
 
     public Skill(Long id, String name) {

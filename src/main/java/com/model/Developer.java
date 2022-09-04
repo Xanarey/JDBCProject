@@ -13,7 +13,6 @@ public class Developer {
     private List<Skill> skills = new ArrayList<>();
 
     public Developer() {
-        id = 1L;
     }
 
     public Developer(Long id, String firstName, String lastName, Status status, Specialty specialty, List<Skill> skills) {
